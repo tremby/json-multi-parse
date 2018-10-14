@@ -1,0 +1,19 @@
+{
+  "name": "json-multi-parse",
+  "version": "1.0.0",
+  "description": "Parse multiple objects out of a JSON string",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tremby/json-multi-parse.git"
+  },
+  "author": "Bart Nagel <bart@tremby.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tremby/json-multi-parse/issues"
+  },
+  "homepage": "https://github.com/tremby/json-multi-parse#readme"
+}
