@@ -1,3 +1,5 @@
+const {splitByIndex} = require('./split');
+
 const ERROR_REGEX = /^Unexpected token { in JSON at position (\d+)$/;
 
 /**
@@ -17,9 +19,11 @@ function jsonMultiParse(input, acc = []) {
 		if (!match) {
 			throw error;
 		}
-		const index = parseInt(match[1], 10);
-		acc.push(JSON.parse(input.substr(0, index)));
-		return jsonMultiParse(input.substr(index), acc);
+
+		const chunks = splitByIndex(input, parseInt(match[1], 10))
+
+		acc.push(JSON.parse(chunks[0]));
+		return jsonMultiParse(chunks[1], acc);
 	}
 }
 
