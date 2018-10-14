@@ -53,6 +53,9 @@ describe('Utility functions', () => {
 });
 
 describe('Main function', () => {
+	test('returns an empty array given empty input', () => {
+		expect(jmp('')).toEqual([]);
+	});
 	test('handles a single object', () => {
 		expect(jmp('{}')).toEqual([{}]);
 	});

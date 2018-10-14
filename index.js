@@ -11,6 +11,10 @@ const ERROR_REGEX = /^Unexpected token { in JSON at position (\d+)$/;
  * @returns {Object[]} Array of objects
  */
 function jsonMultiParse(input, acc = []) {
+	if (input.trim().length === 0) {
+		return acc;
+	}
+
 	try {
 		acc.push(JSON.parse(input));
 		return acc;
