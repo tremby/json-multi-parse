@@ -7,7 +7,9 @@ source, such as the following:
     {"object 1": "value 1"}{"object 2":"value 2"}
 
 There can be whitespace between objects.
-Bare JSON types other than objects, like strings, arrays, booleans, and numbers, are not supported.
+Bare JSON types other than objects,
+like strings, arrays, booleans, and numbers,
+may or may not be supported depending on the Javascript engine being used.
 
 An array is always returned on success.
 Otherwise, an error thrown by `JSON.parse` is rethrown.
