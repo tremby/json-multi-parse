@@ -17,10 +17,20 @@ const ERROR_REGEXES = [
  *
  * @param {string} input String with zero or more JSON objects in series,
  *                       possibly separated by whitespace
+ * @param {Object} [options] Options:
+ * @param {boolean} [options.partial] Don't throw an error if the input ends
+ *                                    partway through an object. Instead add a
+ *                                    property `remainder` to the returned array
+ *                                    with the remaining partial JSON string.
+ *                                    Default: false
  * @param {string[]} [acc] Accumulator for internal use
  * @returns {Object[]} Array of objects
  */
-function jsonMultiParse(input, acc = []) {
+function jsonMultiParse(input, options = {}, acc = []) {
+	if (options.partial) {
+		acc.remainder = '';
+	}
+
 	if (input.trim().length === 0) {
 		return acc;
 	}
@@ -36,6 +46,10 @@ function jsonMultiParse(input, acc = []) {
 			}
 		}
 		if (!match) {
+			if (options.partial) {
+				acc.remainder = input;
+				return acc;
+			}
 			throw error;
 		}
 
@@ -44,7 +58,7 @@ function jsonMultiParse(input, acc = []) {
 			: splitByLineAndChar(input, parseInt(match[1], 10) - 1, parseInt(match[2], 10) - 1);
 
 		acc.push(JSON.parse(chunks[0]));
-		return jsonMultiParse(chunks[1], acc);
+		return jsonMultiParse(chunks[1], options, acc);
 	}
 }
 

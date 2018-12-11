@@ -17,6 +17,11 @@ Otherwise, an error thrown by `JSON.parse` is rethrown.
 Regex solutions such as splitting on `}{` won't work since that could appear in
 a string inside the JSON object.
 
+An option `partial` is available to handle ending partway through a JSON object.
+If this is enabled, and such an unexpected ending is encountered,
+the returned array will have an extra property `remainder`
+containing the remaining partial JSON string.
+
 Installation
 ------------
 
@@ -26,7 +31,18 @@ Usage
 -----
 
     jsonParseMulti = require('json-multi-parse');
-    console.log(jsonParseMulti('{"object 1": "value 1"}{"object 2":"value 2"}').length); // 2
+
+    parsed = jsonParseMulti('{"object 1": "value 1"}{"object 2":"value 2"}');
+    console.log(parsed.length); // 2
+    console.log(parsed.remainder); // undefined
+
+    parsed = jsonParseMulti('{"object 1": "value 1"}{"object 2":"value 2"}', {partial: true});
+    console.log(parsed.length); // 2
+    console.log(parsed.remainder); // ''
+
+    parsed = jsonParseMulti('{"object 1": "value 1"}{"obje', {partial: true});
+    console.log(parsed.length); // 1
+    console.log(parsed.remainder); // '{"obje'
 
 Warning
 -------

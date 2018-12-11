@@ -177,4 +177,67 @@ describe('Main function', () => {
 	test('handles trailing whitespace', () => {
 		expect(jmp('{}{} \n\t')).toEqual([{}, {}]);
 	});
+	test('throws an error on partial JSON', () => {
+		expect(() => {
+			jmp('{');
+		}).toThrow();
+	});
+	test('throws an error on partial JSON after complete JSON', () => {
+		expect(() => {
+			jmp('{}{');
+		}).toThrow();
+	});
+});
+
+describe('Main function in "partial" mode', () => {
+	test('returns an empty array given empty input', () => {
+		const expected = [];
+		expected.remainder = '';
+		expect(jmp('', {partial: true})).toEqual(expected);
+	});
+	test('handles a single object', () => {
+		const expected = [{}];
+		expected.remainder = '';
+		expect(jmp('{}', {partial: true})).toEqual(expected);
+	});
+	test('handles two objects', () => {
+		const expected = [{}, {}];
+		expected.remainder = '';
+		expect(jmp('{}{}', {partial: true})).toEqual(expected);
+	});
+	test('handles three objects', () => {
+		const expected = [{}, {}, {}];
+		expected.remainder = '';
+		expect(jmp('{}{}{}', {partial: true})).toEqual(expected);
+	});
+	test('handles objects with braces in strings', () => {
+		const expected = [{obj1: 'test}{test'}, {}, {}];
+		expected.remainder = '';
+		expect(jmp('{"obj1":"test}{test"}{}{}', {partial: true})).toEqual(expected);
+	});
+	test('handles whitespace between objects', () => {
+		const expected = [{}, {}];
+		expected.remainder = '';
+		expect(jmp('{} \n\t{}', {partial: true})).toEqual(expected);
+	});
+	test('handles leading whitespace', () => {
+		const expected = [{}, {}];
+		expected.remainder = '';
+		expect(jmp(' \n\t{}{}', {partial: true})).toEqual(expected);
+	});
+	test('handles trailing whitespace', () => {
+		const expected = [{}, {}];
+		expected.remainder = '';
+		expect(jmp('{}{} \n\t', {partial: true})).toEqual(expected);
+	});
+	test('handles partial JSON', () => {
+		const expected = [];
+		expected.remainder = '{';
+		expect(jmp('{', {partial: true})).toEqual(expected);
+	});
+	test('handles partial JSON after complete JSON', () => {
+		const expected = [{}];
+		expected.remainder = '{';
+		expect(jmp('{}{', {partial: true})).toEqual(expected);
+	});
 });
