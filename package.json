@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "description": "Parse multiple objects out of a JSON string",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "jest"
   },
