@@ -22,6 +22,8 @@ If this is enabled, and such an unexpected ending is encountered,
 the returned array will have an extra property `remainder`
 containing the remaining partial JSON string.
 
+Typescript types are included.
+
 Installation
 ------------
 
@@ -43,6 +45,20 @@ Usage
     parsed = jsonParseMulti('{"object 1": "value 1"}{"obje', {partial: true});
     console.log(parsed.length); // 1
     console.log(parsed.remainder); // '{"obje'
+
+### Typescript
+
+The default type of each item of the returned array is `object`.
+This can be overridden if you are certain of what you will be receiving,
+by passing a type to the generic:
+
+    const parsed = jsonMultiParse<MyObjectType>; // MyObjectType[]
+
+If you are not totally certain about the data you're receiving,
+like if it's from a 3rd-party API or from user input,
+it's safer to do some type validation/narrowing, such as via
+[type predicates](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates),
+or maybe using something like [Zod](https://zod.dev/).
 
 Warning
 -------
