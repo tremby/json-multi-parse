@@ -52,7 +52,7 @@ The default type of each item of the returned array is `any`.
 This can be overridden if you are certain of what you will be receiving,
 by passing a type to the generic:
 
-    const parsed = jsonMultiParse<MyObjectType>; // MyObjectType[]
+    const parsed = jsonMultiParse<MyObjectType>('...'); // MyObjectType[]
 
 If you are not totally certain about the data you're receiving,
 like if it's from a 3rd-party API or from user input,
