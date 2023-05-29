@@ -13,18 +13,18 @@ const ERROR_REGEXES = [
 ];
 
 /**
- * Parse a string of multiple JSON objects
+ * Parse a string of multiple JSON objects/values
  *
- * @param {string} input String with zero or more JSON objects in series,
+ * @param {string} input String with zero or more JSON objects/values in series,
  *                       possibly separated by whitespace
  * @param {Object} [options] Options:
  * @param {boolean} [options.partial] Don't throw an error if the input ends
- *                                    partway through an object. Instead add a
- *                                    property `remainder` to the returned array
- *                                    with the remaining partial JSON string.
- *                                    Default: false
+ *                                    partway through an object/value. Instead
+ *                                    add a property `remainder` to the returned
+ *                                    array with the remaining partial JSON
+ *                                    string. Default: false
  * @param {string[]} [acc] Accumulator for internal use
- * @returns {Object[]} Array of objects
+ * @returns {(Object|Array|string|number|boolean|null)[]} Array of results
  */
 function jsonMultiParse(input, options = {}, acc = []) {
 	if (options.partial) {

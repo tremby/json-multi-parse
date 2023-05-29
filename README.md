@@ -48,7 +48,7 @@ Usage
 
 ### Typescript
 
-The default type of each item of the returned array is `object`.
+The default type of each item of the returned array is `any`.
 This can be overridden if you are certain of what you will be receiving,
 by passing a type to the generic:
 
