@@ -1,6 +1,6 @@
 {
   "name": "json-multi-parse",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Parse multiple objects out of a JSON string",
   "main": "index.js",
   "types": "index.d.ts",
