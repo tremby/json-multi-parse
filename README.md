@@ -32,17 +32,17 @@ Installation
 Usage
 -----
 
-    jsonParseMulti = require('json-multi-parse');
+    jsonMultiParse = require('json-multi-parse');
 
-    parsed = jsonParseMulti('{"object 1": "value 1"}{"object 2":"value 2"}');
+    parsed = jsonMultiParse('{"object 1": "value 1"}{"object 2":"value 2"}');
     console.log(parsed.length); // 2
     console.log(parsed.remainder); // undefined
 
-    parsed = jsonParseMulti('{"object 1": "value 1"}{"object 2":"value 2"}', {partial: true});
+    parsed = jsonMultiParse('{"object 1": "value 1"}{"object 2":"value 2"}', {partial: true});
     console.log(parsed.length); // 2
     console.log(parsed.remainder); // ''
 
-    parsed = jsonParseMulti('{"object 1": "value 1"}{"obje', {partial: true});
+    parsed = jsonMultiParse('{"object 1": "value 1"}{"obje', {partial: true});
     console.log(parsed.length); // 1
     console.log(parsed.remainder); // '{"obje'
 
