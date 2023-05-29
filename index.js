@@ -9,6 +9,7 @@ const {splitByIndex, splitByLineAndChar} = require('./split');
  */
 const ERROR_REGEXES = [
 	/^()()Unexpected .* in JSON at position (\d+)$/, // Node 8..18, Chrome 69
+	/^()()Unexpected non-whitespace character after JSON at position (\d+)$/, // Chromium 113
 	/^JSON.parse: unexpected non-whitespace character after JSON data at line (\d+) column (\d+) of the JSON data()$/, // Firefox 62
 ];
 
